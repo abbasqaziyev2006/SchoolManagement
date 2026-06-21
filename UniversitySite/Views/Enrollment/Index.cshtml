@@ -3,25 +3,29 @@
     ViewData["Title"] = "Enrollment";
 }
 
-<div class="page-container">
+<div class="page-container page-container-wide">
     <div class="page-header">
         <div>
             <h1><i class="bi bi-clipboard-check-fill"></i> Enrollment</h1>
-            <p class="subtitle">Track student course registrations</p>
+            <p class="subtitle">Semester, grades, attendance and registration status</p>
         </div>
         <a class="btn btn-primary" href="/Enrollment/Create">
             <i class="bi bi-plus-lg me-1"></i> Add New Enrollment
         </a>
     </div>
 
-    <div class="table-card">
+    <div class="table-card table-scroll">
         <table class="table">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Student</th>
                     <th>Course</th>
+                    <th>Semester</th>
                     <th>Date</th>
+                    <th>Grade</th>
+                    <th>Attendance</th>
+                    <th>Status</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -32,13 +36,17 @@
                         <td><span class="id-badge">#@item.EId</span></td>
                         <td><strong>@item.StudentName</strong></td>
                         <td>@item.Course</td>
+                        <td>@item.Semester</td>
                         <td>@item.EnrollDate.ToShortDateString()</td>
+                        <td><span class="gpa-badge">@item.Grade</span></td>
+                        <td>@item.AttendancePercent%</td>
+                        <td><span class="status-badge status-active">@item.Status</span></td>
                         <td class="action-cell">
                             <a href="/Enrollment/Edit/@item.EId" class="btn btn-edit btn-sm">
-                                <i class="bi bi-pencil me-1"></i>Edit
+                                <i class="bi bi-pencil"></i>
                             </a>
                             <a href="/Enrollment/Delete/@item.EId" class="btn btn-delete btn-sm" onclick="return confirm('Are you sure?')">
-                                <i class="bi bi-trash me-1"></i>Delete
+                                <i class="bi bi-trash"></i>
                             </a>
                         </td>
                     </tr>

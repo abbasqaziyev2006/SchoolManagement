@@ -4,7 +4,7 @@
 }
 
 <div class="page-container">
-    <div class="form-card">
+    <div class="form-card form-card-wide">
         <div class="form-card-header">
             <div class="form-icon"><i class="bi bi-person-badge-fill"></i></div>
             <h2>Add Teacher</h2>
@@ -12,17 +12,48 @@
         </div>
 
         <form asp-action="Create" method="post" onsubmit="return validateForm();">
-            <div class="mb-3">
-                <label class="form-label">Name</label>
-                <input asp-for="Name" class="form-control" placeholder="Full name" />
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Course</label>
-                <input asp-for="Course" class="form-control" placeholder="Assigned course" />
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Age</label>
-                <input asp-for="Age" class="form-control" type="number" placeholder="Age" />
+            <div class="form-grid">
+                <div class="mb-3">
+                    <label class="form-label">Full Name *</label>
+                    <input asp-for="Name" class="form-control" placeholder="Full name" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Department *</label>
+                    <input asp-for="Department" class="form-control" placeholder="Department" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Course *</label>
+                    <input asp-for="Course" class="form-control" placeholder="Assigned course" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Degree</label>
+                    <select asp-for="Degree" class="form-control">
+                        <option value="Bachelor">Bachelor</option>
+                        <option value="Master">Master</option>
+                        <option value="PhD">PhD</option>
+                        <option value="Professor">Professor</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input asp-for="Email" class="form-control" placeholder="teacher@email.com" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Phone</label>
+                    <input asp-for="Phone" class="form-control" placeholder="+1 555 000 0000" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Age *</label>
+                    <input asp-for="Age" class="form-control" type="number" min="22" max="80" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Experience (years)</label>
+                    <input asp-for="ExperienceYears" class="form-control" type="number" min="0" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Salary ($)</label>
+                    <input asp-for="Salary" class="form-control" type="number" min="0" step="0.01" />
+                </div>
             </div>
             <div class="form-actions">
                 <button type="submit" class="btn btn-success">
@@ -40,14 +71,13 @@
 <script>
     function validateForm() {
         const name = document.querySelector('[name="Name"]').value.trim();
+        const dept = document.querySelector('[name="Department"]').value.trim();
         const course = document.querySelector('[name="Course"]').value.trim();
         const age = document.querySelector('[name="Age"]').value.trim();
-
-        if (!name || !course || !age) {
-            alert("All fields are required: Name, Course, and Age.");
+        if (!name || !dept || !course || !age) {
+            alert("Name, department, course and age are required.");
             return false;
         }
-
         return true;
     }
 </script>

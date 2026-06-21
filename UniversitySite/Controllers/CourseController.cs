@@ -1,37 +1,34 @@
 using Microsoft.AspNetCore.Mvc;
+using SchoolManagement.Data;
 using SchoolManagement.Models;
 
 namespace SchoolManagement.Controllers
 {
     public class CourseController : Controller
     {
-        private static readonly List<Course> _courses = new()
-        {
-            new Course { CourseId = 1, CourseName = "Computer Science", Duration = "4 Years" },
-            new Course { CourseId = 2, CourseName = "Business Administration", Duration = "3 Years" }
-        };
+        private static List<Course> Courses => UniversityData.Courses;
 
         public IActionResult Index()
         {
-            return View(_courses);
+            return View(Courses);
         }
 
         public IActionResult Create()
         {
-            return View(new Course());
+            return View(new Course { Level = "Bachelor", Language = "English" });
         }
 
         [HttpPost]
         public IActionResult Create(Course course)
         {
-            course.CourseId = _courses.Count > 0 ? _courses.Max(c => c.CourseId) + 1 : 1;
-            _courses.Add(course);
+            course.CourseId = Courses.Count > 0 ? Courses.Max(c => c.CourseId) + 1 : 1;
+            Courses.Add(course);
             return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Edit(int id)
         {
-            var course = _courses.FirstOrDefault(c => c.CourseId == id);
+            var course = Courses.FirstOrDefault(c => c.CourseId == id);
             if (course == null)
                 return NotFound();
 
@@ -41,23 +38,28 @@ namespace SchoolManagement.Controllers
         [HttpPost]
         public IActionResult Edit(Course course)
         {
-            var existing = _courses.FirstOrDefault(c => c.CourseId == course.CourseId);
+            var existing = Courses.FirstOrDefault(c => c.CourseId == course.CourseId);
             if (existing == null)
                 return NotFound();
 
             existing.CourseName = course.CourseName;
             existing.Duration = course.Duration;
+            existing.Department = course.Department;
+            existing.Credits = course.Credits;
+            existing.Language = course.Language;
+            existing.TuitionFee = course.TuitionFee;
+            existing.Level = course.Level;
 
             return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Delete(int id)
         {
-            var course = _courses.FirstOrDefault(c => c.CourseId == id);
+            var course = Courses.FirstOrDefault(c => c.CourseId == id);
             if (course == null)
                 return NotFound();
 
-            _courses.Remove(course);
+            Courses.Remove(course);
             return RedirectToAction(nameof(Index));
         }
     }

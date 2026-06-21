@@ -1,19 +1,16 @@
 using Microsoft.AspNetCore.Mvc;
+using SchoolManagement.Data;
 using SchoolManagement.Models;
 
 namespace SchoolManagement.Controllers
 {
     public class TeacherController : Controller
     {
-        private static readonly List<Teacher> _teachers = new()
-        {
-            new Teacher { TeacherId = 1, Name = "Dr. Alice Brown", Course = "Mathematics", Age = 45 },
-            new Teacher { TeacherId = 2, Name = "Prof. Bob Wilson", Course = "Physics", Age = 52 }
-        };
+        private static List<Teacher> Teachers => UniversityData.Teachers;
 
         public IActionResult Index()
         {
-            return View(_teachers);
+            return View(Teachers);
         }
 
         public IActionResult Create()
@@ -24,14 +21,14 @@ namespace SchoolManagement.Controllers
         [HttpPost]
         public IActionResult Create(Teacher teacher)
         {
-            teacher.TeacherId = _teachers.Count > 0 ? _teachers.Max(t => t.TeacherId) + 1 : 1;
-            _teachers.Add(teacher);
+            teacher.TeacherId = Teachers.Count > 0 ? Teachers.Max(t => t.TeacherId) + 1 : 1;
+            Teachers.Add(teacher);
             return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Edit(int id)
         {
-            var teacher = _teachers.FirstOrDefault(t => t.TeacherId == id);
+            var teacher = Teachers.FirstOrDefault(t => t.TeacherId == id);
             if (teacher == null)
                 return NotFound();
 
@@ -41,24 +38,30 @@ namespace SchoolManagement.Controllers
         [HttpPost]
         public IActionResult Edit(Teacher teacher)
         {
-            var existing = _teachers.FirstOrDefault(t => t.TeacherId == teacher.TeacherId);
+            var existing = Teachers.FirstOrDefault(t => t.TeacherId == teacher.TeacherId);
             if (existing == null)
                 return NotFound();
 
             existing.Name = teacher.Name;
             existing.Course = teacher.Course;
             existing.Age = teacher.Age;
+            existing.Email = teacher.Email;
+            existing.Phone = teacher.Phone;
+            existing.Department = teacher.Department;
+            existing.Degree = teacher.Degree;
+            existing.ExperienceYears = teacher.ExperienceYears;
+            existing.Salary = teacher.Salary;
 
             return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Delete(int id)
         {
-            var teacher = _teachers.FirstOrDefault(t => t.TeacherId == id);
+            var teacher = Teachers.FirstOrDefault(t => t.TeacherId == id);
             if (teacher == null)
                 return NotFound();
 
-            _teachers.Remove(teacher);
+            Teachers.Remove(teacher);
             return RedirectToAction(nameof(Index));
         }
     }

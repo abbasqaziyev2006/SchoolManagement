@@ -4,25 +4,27 @@
     ViewData["Title"] = "Teachers";
 }
 
-<div class="page-container">
+<div class="page-container page-container-wide">
     <div class="page-header">
         <div>
             <h1><i class="bi bi-person-badge-fill"></i> Teachers</h1>
-            <p class="subtitle">View and manage faculty members</p>
+            <p class="subtitle">Faculty profiles, departments and experience</p>
         </div>
         <a class="btn btn-primary" href="/Teacher/Create">
             <i class="bi bi-plus-lg me-1"></i> Add New Teacher
         </a>
     </div>
 
-    <div class="table-card">
+    <div class="table-card table-scroll">
         <table class="table">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
+                    <th>Department</th>
                     <th>Course</th>
-                    <th>Age</th>
+                    <th>Degree</th>
+                    <th>Experience</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -31,15 +33,20 @@
                 {
                     <tr>
                         <td><span class="id-badge">#@item.TeacherId</span></td>
-                        <td><strong>@item.Name</strong></td>
+                        <td>
+                            <strong>@item.Name</strong>
+                            <small class="d-block text-muted">@item.Email</small>
+                        </td>
+                        <td>@item.Department</td>
                         <td>@item.Course</td>
-                        <td>@item.Age</td>
+                        <td>@item.Degree</td>
+                        <td>@item.ExperienceYears yrs</td>
                         <td class="action-cell">
                             <a class="btn btn-edit btn-sm" href="/Teacher/Edit/@item.TeacherId">
-                                <i class="bi bi-pencil me-1"></i>Edit
+                                <i class="bi bi-pencil"></i>
                             </a>
                             <a class="btn btn-delete btn-sm" href="/Teacher/Delete/@item.TeacherId" onclick="return confirm('Are you sure?')">
-                                <i class="bi bi-trash me-1"></i>Delete
+                                <i class="bi bi-trash"></i>
                             </a>
                         </td>
                     </tr>

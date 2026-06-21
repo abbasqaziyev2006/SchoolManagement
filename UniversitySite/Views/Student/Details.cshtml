@@ -1,0 +1,91 @@
+@model SchoolManagement.Models.Student
+@{
+    ViewData["Title"] = "Student Profile";
+    var age = DateTime.Today.Year - Model.BirthDate.Year;
+    if (Model.BirthDate.Date > DateTime.Today.AddYears(-age)) age--;
+}
+
+<div class="page-container">
+    <div class="profile-header">
+        <div class="profile-avatar">
+            <i class="bi bi-person-fill"></i>
+        </div>
+        <div class="profile-info">
+            <h1>@Model.StudentName</h1>
+            <p class="profile-specialty"><i class="bi bi-mortarboard me-1"></i>@Model.Specialty</p>
+            <div class="profile-tags">
+                <span class="status-badge status-active">@Model.Status</span>
+                <span class="tag-badge"><i class="bi bi-geo-alt"></i> @Model.City</span>
+                <span class="tag-badge"><i class="bi bi-calendar"></i> Enrolled @Model.EnrollmentYear</span>
+                @if (Model.Scholarship != "None")
+                {
+                    <span class="tag-badge tag-scholarship"><i class="bi bi-award"></i> @Model.Scholarship</span>
+                }
+            </div>
+        </div>
+        <div class="profile-actions">
+            <a class="btn btn-edit" href="/Student/Edit/@Model.StudentId">
+                <i class="bi bi-pencil me-1"></i> Edit
+            </a>
+            <a class="btn btn-secondary" href="/Student">
+                <i class="bi bi-arrow-left me-1"></i> Back
+            </a>
+        </div>
+    </div>
+
+    <div class="profile-stats">
+        <div class="profile-stat">
+            <div class="profile-stat-icon score"><i class="bi bi-graph-up"></i></div>
+            <div class="profile-stat-value">@Model.EntranceScore</div>
+            <div class="profile-stat-label">Entrance Score</div>
+        </div>
+        <div class="profile-stat">
+            <div class="profile-stat-icon fee"><i class="bi bi-cash-coin"></i></div>
+            <div class="profile-stat-value">$@Model.AnnualFee.ToString("N0")</div>
+            <div class="profile-stat-label">Annual Fee</div>
+        </div>
+        <div class="profile-stat">
+            <div class="profile-stat-icon gpa"><i class="bi bi-star-fill"></i></div>
+            <div class="profile-stat-value">@Model.GPA.ToString("0.00")</div>
+            <div class="profile-stat-label">GPA</div>
+        </div>
+        <div class="profile-stat">
+            <div class="profile-stat-icon age"><i class="bi bi-cake2"></i></div>
+            <div class="profile-stat-value">@age</div>
+            <div class="profile-stat-label">Age</div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="detail-card">
+                <h3><i class="bi bi-person-vcard me-2"></i>Personal Information</h3>
+                <dl class="detail-list">
+                    <dt>Date of Birth</dt>
+                    <dd>@Model.BirthDate.ToString("MMMM dd, yyyy")</dd>
+                    <dt>City</dt>
+                    <dd>@Model.City</dd>
+                    <dt>Enrollment Year</dt>
+                    <dd>@Model.EnrollmentYear</dd>
+                    <dt>Scholarship</dt>
+                    <dd>@Model.Scholarship</dd>
+                </dl>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="detail-card">
+                <h3><i class="bi bi-envelope me-2"></i>Contact Information</h3>
+                <dl class="detail-list">
+                    <dt>Email</dt>
+                    <dd><a href="mailto:@Model.Email">@Model.Email</a></dd>
+                    <dt>Phone</dt>
+                    <dd><a href="tel:@Model.Phone">@Model.Phone</a></dd>
+                    <dt>Specialty</dt>
+                    <dd>@Model.Specialty</dd>
+                    <dt>Status</dt>
+                    <dd>@Model.Status</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>

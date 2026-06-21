@@ -8,7 +8,7 @@
             <i class="bi bi-stars"></i> Smart Campus Management
         </div>
         <h1>Welcome to UniManage</h1>
-        <p class="lead">Manage students, courses, teachers and enrollments — all in one place.</p>
+        <p class="lead">Manage students, courses, teachers and enrollments — entrance scores, specialties, fees and more.</p>
         <a href="/Student" class="btn btn-accent btn-lg me-2">
             <i class="bi bi-rocket-takeoff me-1"></i> Get Started
         </a>
@@ -23,26 +23,26 @@
         <div class="row g-4">
             <div class="col-6 col-md-3">
                 <div class="stat-item">
-                    <div class="stat-number"><i class="bi bi-people"></i></div>
+                    <div class="stat-number">@ViewBag.StudentCount</div>
                     <div class="stat-label">Students</div>
                 </div>
             </div>
             <div class="col-6 col-md-3">
                 <div class="stat-item">
-                    <div class="stat-number"><i class="bi bi-book"></i></div>
+                    <div class="stat-number">@ViewBag.CourseCount</div>
                     <div class="stat-label">Courses</div>
                 </div>
             </div>
             <div class="col-6 col-md-3">
                 <div class="stat-item">
-                    <div class="stat-number"><i class="bi bi-person-badge"></i></div>
-                    <div class="stat-label">Teachers</div>
+                    <div class="stat-number">@ViewBag.AvgEntranceScore</div>
+                    <div class="stat-label">Avg. Entrance Score</div>
                 </div>
             </div>
             <div class="col-6 col-md-3">
                 <div class="stat-item">
-                    <div class="stat-number"><i class="bi bi-clipboard-check"></i></div>
-                    <div class="stat-label">Enrollments</div>
+                    <div class="stat-number">@ViewBag.ScholarshipCount</div>
+                    <div class="stat-label">Scholarships</div>
                 </div>
             </div>
         </div>
@@ -59,7 +59,7 @@
             <div class="feature-card">
                 <div class="feature-icon students"><i class="bi bi-people-fill"></i></div>
                 <h5>Students</h5>
-                <p>Manage student records — names, emails and contact information securely.</p>
+                <p>Entrance scores, specialties, annual fees, GPA, scholarships and full profiles.</p>
                 <a href="/Student" class="btn btn-primary w-100">
                     <i class="bi bi-arrow-right-circle me-1"></i> Manage Students
                 </a>
@@ -69,7 +69,7 @@
             <div class="feature-card">
                 <div class="feature-icon courses"><i class="bi bi-book-fill"></i></div>
                 <h5>Courses</h5>
-                <p>Create and update course catalog with names and duration details.</p>
+                <p>Departments, credits, tuition fees, language and degree level programs.</p>
                 <a href="/Course" class="btn btn-primary w-100">
                     <i class="bi bi-arrow-right-circle me-1"></i> Manage Courses
                 </a>
@@ -79,7 +79,7 @@
             <div class="feature-card">
                 <div class="feature-icon teachers"><i class="bi bi-person-badge-fill"></i></div>
                 <h5>Teachers</h5>
-                <p>Keep track of faculty members, their courses and profiles.</p>
+                <p>Faculty members with department, degree, experience and contact details.</p>
                 <a href="/Teacher" class="btn btn-primary w-100">
                     <i class="bi bi-arrow-right-circle me-1"></i> Manage Teachers
                 </a>
@@ -89,7 +89,7 @@
             <div class="feature-card">
                 <div class="feature-icon enroll"><i class="bi bi-clipboard-check-fill"></i></div>
                 <h5>Enrollment</h5>
-                <p>Register students to courses and track enrollment dates.</p>
+                <p>Semester tracking, grades, attendance percentage and registration status.</p>
                 <a href="/Enrollment" class="btn btn-primary w-100">
                     <i class="bi bi-arrow-right-circle me-1"></i> Manage Enrollment
                 </a>

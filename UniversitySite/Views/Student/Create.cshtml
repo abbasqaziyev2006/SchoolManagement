@@ -4,25 +4,74 @@
 }
 
 <div class="page-container">
-    <div class="form-card">
+    <div class="form-card form-card-wide">
         <div class="form-card-header">
             <div class="form-icon"><i class="bi bi-person-plus-fill"></i></div>
-            <h2>Add Student</h2>
-            <p>Fill in the details to register a new student</p>
+            <h2>Register New Student</h2>
+            <p>Fill in all student details below</p>
         </div>
 
         <form asp-action="Create" method="post" onsubmit="return validateForm();">
-            <div class="mb-3">
-                <label class="form-label">Student Name</label>
-                <input asp-for="StudentName" class="form-control" placeholder="Enter full name" />
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Email</label>
-                <input asp-for="Email" class="form-control" placeholder="student@email.com" />
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Phone</label>
-                <input asp-for="Phone" class="form-control" placeholder="+90 555 000 0000" />
+            <div class="form-grid">
+                <div class="mb-3">
+                    <label class="form-label">Full Name *</label>
+                    <input asp-for="StudentName" class="form-control" placeholder="Enter full name" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Specialty *</label>
+                    <input asp-for="Specialty" class="form-control" placeholder="e.g. Computer Science" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Entrance Score *</label>
+                    <input asp-for="EntranceScore" class="form-control" type="number" min="0" max="700" step="0.1" placeholder="0–700" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Annual Fee ($) *</label>
+                    <input asp-for="AnnualFee" class="form-control" type="number" min="0" step="0.01" placeholder="2500" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Email *</label>
+                    <input asp-for="Email" class="form-control" placeholder="student@email.com" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Phone *</label>
+                    <input asp-for="Phone" class="form-control" placeholder="+1 555 000 0000" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">City</label>
+                    <input asp-for="City" class="form-control" placeholder="City" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Date of Birth</label>
+                    <input asp-for="BirthDate" class="form-control" type="date" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Enrollment Year</label>
+                    <input asp-for="EnrollmentYear" class="form-control" type="number" min="2000" max="2030" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">GPA</label>
+                    <input asp-for="GPA" class="form-control" type="number" min="0" max="5" step="0.01" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Status</label>
+                    <select asp-for="Status" class="form-control">
+                        <option value="Active">Active</option>
+                        <option value="Graduated">Graduated</option>
+                        <option value="Dismissed">Dismissed</option>
+                        <option value="Academic Leave">Academic Leave</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Scholarship</label>
+                    <select asp-for="Scholarship" class="form-control">
+                        <option value="None">None</option>
+                        <option value="25% Scholarship">25% Scholarship</option>
+                        <option value="50% Scholarship">50% Scholarship</option>
+                        <option value="75% Scholarship">75% Scholarship</option>
+                        <option value="Full Scholarship">Full Scholarship</option>
+                    </select>
+                </div>
             </div>
             <div class="form-actions">
                 <button type="submit" class="btn btn-success">
@@ -39,15 +88,19 @@
 @section Scripts {
 <script>
     function validateForm() {
-        const studentname = document.querySelector('[name="StudentName"]').value.trim();
-        const email = document.querySelector('[name="Email"]').value.trim();
-        const phone = document.querySelector('[name="Phone"]').value.trim();
-
-        if (!studentname || !email || !phone) {
-            alert("All fields are required: StudentName, Email, and Phone.");
+        const required = ['StudentName', 'Specialty', 'EntranceScore', 'AnnualFee', 'Email', 'Phone'];
+        for (const field of required) {
+            const el = document.querySelector(`[name="${field}"]`);
+            if (!el || !el.value.trim()) {
+                alert('Please fill in all required fields.');
+                return false;
+            }
+        }
+        const score = parseFloat(document.querySelector('[name="EntranceScore"]').value);
+        if (score < 0 || score > 700) {
+            alert('Entrance score must be between 0 and 700.');
             return false;
         }
-
         return true;
     }
 </script>

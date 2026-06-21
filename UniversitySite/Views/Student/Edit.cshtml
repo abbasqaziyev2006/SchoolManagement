@@ -4,26 +4,75 @@
 }
 
 <div class="page-container">
-    <div class="form-card">
+    <div class="form-card form-card-wide">
         <div class="form-card-header">
             <div class="form-icon"><i class="bi bi-pencil-square"></i></div>
             <h2>Edit Student</h2>
-            <p>Update student information</p>
+            <p>Update information for @Model.StudentName</p>
         </div>
 
         <form asp-action="Edit" method="post">
             <input type="hidden" asp-for="StudentId" />
-            <div class="mb-3">
-                <label class="form-label">Student Name</label>
-                <input asp-for="StudentName" class="form-control" />
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Email</label>
-                <input asp-for="Email" class="form-control" />
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Phone</label>
-                <input asp-for="Phone" class="form-control" />
+            <div class="form-grid">
+                <div class="mb-3">
+                    <label class="form-label">Full Name</label>
+                    <input asp-for="StudentName" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Specialty</label>
+                    <input asp-for="Specialty" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Entrance Score</label>
+                    <input asp-for="EntranceScore" class="form-control" type="number" min="0" max="700" step="0.1" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Annual Fee ($)</label>
+                    <input asp-for="AnnualFee" class="form-control" type="number" min="0" step="0.01" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input asp-for="Email" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Phone</label>
+                    <input asp-for="Phone" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">City</label>
+                    <input asp-for="City" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Date of Birth</label>
+                    <input asp-for="BirthDate" class="form-control" type="date" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Enrollment Year</label>
+                    <input asp-for="EnrollmentYear" class="form-control" type="number" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">GPA</label>
+                    <input asp-for="GPA" class="form-control" type="number" min="0" max="5" step="0.01" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Status</label>
+                    <select asp-for="Status" class="form-control">
+                        <option value="Active">Active</option>
+                        <option value="Graduated">Graduated</option>
+                        <option value="Dismissed">Dismissed</option>
+                        <option value="Academic Leave">Academic Leave</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Scholarship</label>
+                    <select asp-for="Scholarship" class="form-control">
+                        <option value="None">None</option>
+                        <option value="25% Scholarship">25% Scholarship</option>
+                        <option value="50% Scholarship">50% Scholarship</option>
+                        <option value="75% Scholarship">75% Scholarship</option>
+                        <option value="Full Scholarship">Full Scholarship</option>
+                    </select>
+                </div>
             </div>
             <div class="form-actions">
                 <button type="submit" class="btn btn-primary">

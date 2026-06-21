@@ -4,7 +4,7 @@
 }
 
 <div class="page-container">
-    <div class="form-card">
+    <div class="form-card form-card-wide">
         <div class="form-card-header">
             <div class="form-icon"><i class="bi bi-pencil-square"></i></div>
             <h2>Edit Enrollment</h2>
@@ -13,17 +13,48 @@
 
         <form asp-action="Edit" method="post">
             <input type="hidden" asp-for="EId" />
-            <div class="mb-3">
-                <label class="form-label">Student Name</label>
-                <input asp-for="StudentName" class="form-control" />
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Course</label>
-                <input asp-for="Course" class="form-control" />
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Enrollment Date</label>
-                <input asp-for="EnrollDate" type="date" class="form-control" />
+            <div class="form-grid">
+                <div class="mb-3">
+                    <label class="form-label">Student Name</label>
+                    <input asp-for="StudentName" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Course</label>
+                    <input asp-for="Course" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Semester</label>
+                    <input asp-for="Semester" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Enrollment Date</label>
+                    <input asp-for="EnrollDate" type="date" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Grade</label>
+                    <select asp-for="Grade" class="form-control">
+                        <option value="">— Not graded yet —</option>
+                        <option value="A+">A+</option>
+                        <option value="A">A</option>
+                        <option value="B+">B+</option>
+                        <option value="B">B</option>
+                        <option value="C+">C+</option>
+                        <option value="C">C</option>
+                        <option value="F">F</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Attendance (%)</label>
+                    <input asp-for="AttendancePercent" class="form-control" type="number" min="0" max="100" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Status</label>
+                    <select asp-for="Status" class="form-control">
+                        <option value="Ongoing">Ongoing</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Dropped">Dropped</option>
+                    </select>
+                </div>
             </div>
             <div class="form-actions">
                 <button type="submit" class="btn btn-primary">

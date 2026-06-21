@@ -4,24 +4,28 @@
     ViewData["Title"] = "Courses";
 }
 
-<div class="page-container">
+<div class="page-container page-container-wide">
     <div class="page-header">
         <div>
             <h1><i class="bi bi-book-fill"></i> Courses</h1>
-            <p class="subtitle">Manage the university course catalog</p>
+            <p class="subtitle">Department, credits, tuition and program details</p>
         </div>
         <a class="btn btn-primary" href="/Course/Create">
             <i class="bi bi-plus-lg me-1"></i> Add New Course
         </a>
     </div>
 
-    <div class="table-card">
+    <div class="table-card table-scroll">
         <table class="table">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Course Name</th>
+                    <th>Department</th>
                     <th>Duration</th>
+                    <th>Credits</th>
+                    <th>Tuition</th>
+                    <th>Level</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -30,14 +34,21 @@
                 {
                     <tr>
                         <td><span class="id-badge">#@item.CourseId</span></td>
-                        <td><strong>@item.CourseName</strong></td>
+                        <td>
+                            <strong>@item.CourseName</strong>
+                            <small class="d-block text-muted">@item.Language</small>
+                        </td>
+                        <td>@item.Department</td>
                         <td>@item.Duration</td>
+                        <td>@item.Credits</td>
+                        <td><span class="fee-badge">$@item.TuitionFee.ToString("N0")</span></td>
+                        <td>@item.Level</td>
                         <td class="action-cell">
                             <a class="btn btn-edit btn-sm" href="/Course/Edit/@item.CourseId">
-                                <i class="bi bi-pencil me-1"></i>Edit
+                                <i class="bi bi-pencil"></i>
                             </a>
                             <a class="btn btn-delete btn-sm" href="/Course/Delete/@item.CourseId" onclick="return confirm('Are you sure?')">
-                                <i class="bi bi-trash me-1"></i>Delete
+                                <i class="bi bi-trash"></i>
                             </a>
                         </td>
                     </tr>
