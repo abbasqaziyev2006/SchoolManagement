@@ -1,29 +1,49 @@
 ﻿@model List<SchoolManagement.Models.Enrollment>
 @{
-    ViewData["Title"] = "Enrollment List";
+    ViewData["Title"] = "Enrollment";
 }
 
-<a class="btn btn-primary mt-3 ms-2" href="/Enrollment/Create">Add New Enrollment</a>
+<div class="page-container">
+    <div class="page-header">
+        <div>
+            <h1><i class="bi bi-clipboard-check-fill"></i> Enrollment</h1>
+            <p class="subtitle">Track student course registrations</p>
+        </div>
+        <a class="btn btn-primary" href="/Enrollment/Create">
+            <i class="bi bi-plus-lg me-1"></i> Add New Enrollment
+        </a>
+    </div>
 
-<table class="table table-bordered mt-3">
-    <tr>
-        <th>EID</th>
-        <th>StudentName</th>
-        <th>Course</th>
-        <th>EnrollDate</th>
-        <th>Actions</th>
-    </tr>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@item.EId</td>
-            <td>@item.StudentName</td>
-            <td>@item.Course</td>
-            <td>@item.EnrollDate.ToShortDateString()</td>
-            <td>
-                <a href="/Enrollment/Edit/@item.EId" class="btn btn-warning btn-sm">Edit</a>
-                <a href="/Enrollment/Delete/@item.EId" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
-            </td>
-        </tr>
-    }
-</table>
+    <div class="table-card">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Student</th>
+                    <th>Course</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td><span class="id-badge">#@item.EId</span></td>
+                        <td><strong>@item.StudentName</strong></td>
+                        <td>@item.Course</td>
+                        <td>@item.EnrollDate.ToShortDateString()</td>
+                        <td class="action-cell">
+                            <a href="/Enrollment/Edit/@item.EId" class="btn btn-edit btn-sm">
+                                <i class="bi bi-pencil me-1"></i>Edit
+                            </a>
+                            <a href="/Enrollment/Delete/@item.EId" class="btn btn-delete btn-sm" onclick="return confirm('Are you sure?')">
+                                <i class="bi bi-trash me-1"></i>Delete
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

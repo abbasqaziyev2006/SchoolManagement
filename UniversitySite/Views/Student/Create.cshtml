@@ -2,25 +2,41 @@
 @{
     ViewData["Title"] = "Add Student";
 }
-<h2>Add Student</h2>
 
-<form asp-action="Create" method="post" onsubmit="return validateForm();">
-    <div class="mb-3">
-        <label>StudentName</label>
-        <input asp-for="StudentName" class="form-control" />
-    </div>
-    <div class="mb-3">
-        <label>Email</label>
-        <input asp-for="Email" class="form-control" />
-    </div>
-    <div class="mb-3">
-        <label>Phone</label>
-        <input asp-for="Phone" class="form-control" />
-    </div>
-    <button type="submit" class="btn btn-success">Add</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
-</form>
+<div class="page-container">
+    <div class="form-card">
+        <div class="form-card-header">
+            <div class="form-icon"><i class="bi bi-person-plus-fill"></i></div>
+            <h2>Add Student</h2>
+            <p>Fill in the details to register a new student</p>
+        </div>
 
+        <form asp-action="Create" method="post" onsubmit="return validateForm();">
+            <div class="mb-3">
+                <label class="form-label">Student Name</label>
+                <input asp-for="StudentName" class="form-control" placeholder="Enter full name" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input asp-for="Email" class="form-control" placeholder="student@email.com" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Phone</label>
+                <input asp-for="Phone" class="form-control" placeholder="+90 555 000 0000" />
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-success">
+                    <i class="bi bi-check-lg me-1"></i> Add Student
+                </button>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="bi bi-x-lg me-1"></i> Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
 <script>
     function validateForm() {
         const studentname = document.querySelector('[name="StudentName"]').value.trim();
@@ -29,9 +45,10 @@
 
         if (!studentname || !email || !phone) {
             alert("All fields are required: StudentName, Email, and Phone.");
-            return false; 
+            return false;
         }
 
-        return true; 
+        return true;
     }
 </script>
+}

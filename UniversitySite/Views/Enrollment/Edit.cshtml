@@ -2,22 +2,37 @@
 @{
     ViewData["Title"] = "Edit Enrollment";
 }
-<h2>Edit Enrollment</h2>
 
-<form asp-action="Edit" method="post">
-    <input type="hidden" asp-for="EId" />
-    <div class="mb-3">
-        <label>StudentName</label>
-        <input asp-for="StudentName" class="form-control" />
+<div class="page-container">
+    <div class="form-card">
+        <div class="form-card-header">
+            <div class="form-icon"><i class="bi bi-pencil-square"></i></div>
+            <h2>Edit Enrollment</h2>
+            <p>Update enrollment details</p>
+        </div>
+
+        <form asp-action="Edit" method="post">
+            <input type="hidden" asp-for="EId" />
+            <div class="mb-3">
+                <label class="form-label">Student Name</label>
+                <input asp-for="StudentName" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Course</label>
+                <input asp-for="Course" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Enrollment Date</label>
+                <input asp-for="EnrollDate" type="date" class="form-control" />
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-check-lg me-1"></i> Update
+                </button>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="bi bi-x-lg me-1"></i> Cancel
+                </a>
+            </div>
+        </form>
     </div>
-    <div class="mb-3">
-        <label>Course</label>
-        <input asp-for="Course" class="form-control" />
-    </div>
-    <div class="mb-3">
-        <label>EnrollDate</label>
-        <input asp-for="EnrollDate" type="date" class="form-control" />
-    </div>
-    <button type="submit" class="btn btn-primary">Update</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
-</form>
+</div>

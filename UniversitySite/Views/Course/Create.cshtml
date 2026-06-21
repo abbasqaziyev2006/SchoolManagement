@@ -2,32 +2,48 @@
 @{
     ViewData["Title"] = "Add Course";
 }
-<h2>Add Course</h2>
 
-<form asp-action="Create" method="post" onsubmit="return validateForm();">
-    <div class="mb-3">
-        <label>CourseName</label>
-        <input asp-for="CourseName" class="form-control" />
-    </div>
-    <div class="mb-3">
-        <label>Duration</label>
-        <input asp-for="Duration" class="form-control" />
-    </div>
-    <button type="submit" class="btn btn-success">Add</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
-</form>
+<div class="page-container">
+    <div class="form-card">
+        <div class="form-card-header">
+            <div class="form-icon"><i class="bi bi-book-half"></i></div>
+            <h2>Add Course</h2>
+            <p>Add a new course to the catalog</p>
+        </div>
 
+        <form asp-action="Create" method="post" onsubmit="return validateForm();">
+            <div class="mb-3">
+                <label class="form-label">Course Name</label>
+                <input asp-for="CourseName" class="form-control" placeholder="e.g. Computer Science" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Duration</label>
+                <input asp-for="Duration" class="form-control" placeholder="e.g. 4 Years" />
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-success">
+                    <i class="bi bi-check-lg me-1"></i> Add Course
+                </button>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="bi bi-x-lg me-1"></i> Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
 <script>
     function validateForm() {
         const coursename = document.querySelector('[name="CourseName"]').value.trim();
         const duration = document.querySelector('[name="Duration"]').value.trim();
 
-
         if (!coursename || !duration) {
             alert("All fields are required: CourseName, Duration.");
-            return false; 
+            return false;
         }
 
-        return true; 
+        return true;
     }
 </script>
+}
