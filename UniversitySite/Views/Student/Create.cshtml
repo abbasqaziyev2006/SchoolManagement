@@ -1,11 +1,10 @@
 ﻿@model SchoolManagement.Models.Student
 @{
-    ViewData["Title"] = "Edit Student";
+    ViewData["Title"] = "Add Student";
 }
-<h2>Edit Student</h2>
+<h2>Add Student</h2>
 
-<form asp-action="Edit" method="post">
-    <input type="hidden" asp-for="StudentId" />
+<form asp-action="Create" method="post" onsubmit="return validateForm();">
     <div class="mb-3">
         <label>StudentName</label>
         <input asp-for="StudentName" class="form-control" />
@@ -18,7 +17,21 @@
         <label>Phone</label>
         <input asp-for="Phone" class="form-control" />
     </div>
-    <button type="submit" class="btn btn-primary">Update</button>
+    <button type="submit" class="btn btn-success">Add</button>
     <a asp-action="Index" class="btn btn-secondary">Cancel</a>
 </form>
 
+<script>
+    function validateForm() {
+        const studentname = document.querySelector('[name="StudentName"]').value.trim();
+        const email = document.querySelector('[name="Email"]').value.trim();
+        const phone = document.querySelector('[name="Phone"]').value.trim();
+
+        if (!studentname || !email || !phone) {
+            alert("All fields are required: StudentName, Email, and Phone.");
+            return false; 
+        }
+
+        return true; 
+    }
+</script>
