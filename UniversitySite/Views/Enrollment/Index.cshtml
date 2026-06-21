@@ -1,0 +1,29 @@
+﻿@model List<SchoolManagement.Models.Enrollment>
+@{
+    ViewData["Title"] = "Enrollment List";
+}
+
+<a class="btn btn-primary mt-3 ms-2" href="/Enrollment/Create">Add New Enrollment</a>
+
+<table class="table table-bordered mt-3">
+    <tr>
+        <th>EID</th>
+        <th>StudentName</th>
+        <th>Course</th>
+        <th>EnrollDate</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.EId</td>
+            <td>@item.StudentName</td>
+            <td>@item.Course</td>
+            <td>@item.EnrollDate.ToShortDateString()</td>
+            <td>
+                <a href="/Enrollment/Edit/@item.EId" class="btn btn-warning btn-sm">Edit</a>
+                <a href="/Enrollment/Delete/@item.EId" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+            </td>
+        </tr>
+    }
+</table>

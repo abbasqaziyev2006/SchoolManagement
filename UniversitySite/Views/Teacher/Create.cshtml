@@ -1,0 +1,37 @@
+﻿@model SchoolManagement.Models.Teacher
+@{
+    ViewData["Title"] = "Add Teacher";
+}
+<h2>Add Teacher</h2>
+
+<form asp-action="Create" method="post" onsubmit="return validateForm();">
+    <div class="mb-3">
+        <label>Name</label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Course</label>
+        <input asp-for="Course" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Age</label>
+        <input asp-for="Age" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-success">Add</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+
+<script>
+    function validateForm() {
+        const name = document.querySelector('[name="Name"]').value.trim();
+        const course = document.querySelector('[name="Course"]').value.trim();
+        const age = document.querySelector('[name="Age"]').value.trim();
+
+        if (!name || !course || !age) {
+            alert("All fields are required: Name, Course, and Age.");
+            return false; 
+        }
+
+        return true; 
+    }
+</script>

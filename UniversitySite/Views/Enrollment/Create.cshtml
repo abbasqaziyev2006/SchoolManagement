@@ -1,0 +1,38 @@
+﻿@model SchoolManagement.Models.Enrollment
+@{
+    ViewData["Title"] = "Add Enrollment";
+}
+<h2>Add Enrollment</h2>
+
+<form asp-action="Create" method="post" onsubmit="return validateForm();">
+    <div class="mb-3">
+        <label>StudentName</label>
+        <input asp-for="StudentName" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Course</label>
+        <input asp-for="Course" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>EnrollDate</label>
+        <input asp-for="EnrollDate" type="date" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-success">Add</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+
+<script>
+    function validateForm() {
+        const studentname = document.querySelector('[name="StudentName"]').value.trim();
+        const course = document.querySelector('[name="Course"]').value.trim();
+        const enrolldate = document.querySelector('[name="EnrollDate"]').value.trim();
+
+        if (!studentname || !course || !enrolldate) {
+            alert("All fields are required: StudentName, Course, and EnrollDate.");
+            return false;
+        }
+
+        return true; 
+    }
+</script>
+

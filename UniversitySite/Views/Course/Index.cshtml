@@ -1,0 +1,32 @@
+﻿@model List<SchoolManagement.Models.Course>
+
+@{
+    ViewData["Title"] = "Courses";
+}
+
+<a class="btn btn-primary mt-3 ms-2" href="/Course/Create">Add New Course</a>
+
+<table class="table table-bordered mt-3">
+    <thead>
+        <tr>
+            <th>CourseID</th> 
+            <th>CourseName</th>
+            <th>Duration</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.CourseId</td> 
+                <td>@item.CourseName</td>
+                <td>@item.Duration</td>
+                <td>
+                    <a class="btn btn-warning btn-sm" href="/Course/Edit/@item.CourseId">Edit</a>
+                    <a class="btn btn-danger btn-sm" href="/Course/Delete/@item.CourseId" onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
